@@ -64,7 +64,9 @@ class MajorController extends Controller
     {
         $data = $request->validated();
         if($request->hasFile('image')){
-            unlink(public_path($major->image));
+            if($major->image){
+                unlink(public_path($major->image));
+            }
             $file = $request->file('image');
             $filename = $file->store('/majors','public');
             $data['image'] = 'storage/' . $filename;
