@@ -27,7 +27,7 @@
         <nav class="navbar navbar-expand-lg navbar-expand-md bg-blue sticky-top">
             <div class="container">
                 <div class="navbar-brand">
-                    <a class="fw-bold text-white m-0 text-decoration-none h3" href="{{route('pages.home')}}">VCare</a>
+                    <a class="fw-bold text-white m-0 text-decoration-none h3" href="{{route('site.home')}}">VCare</a>
                 </div>
                 <button class="navbar-toggler btn-outline-light border-0 shadow-none" type="button"
                     data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -36,7 +36,7 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <div class="d-flex gap-3 flex-wrap justify-content-center" role="group">
-                        <a type="button" class="btn btn-outline-light navigation--button" href="{{route('pages.home')}}">Home</a>
+                        <a type="button" class="btn btn-outline-light navigation--button" href="{{route('site.home')}}">Home</a>
                         <a type="button" class="btn btn-outline-light navigation--button"
                             href="{{route('pages.majors')}}">majors</a>
                         <a type="button" class="btn btn-outline-light navigation--button"

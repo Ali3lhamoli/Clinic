@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Site\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,11 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+
+Route::as('site.')->group(function(){
+
+    Route::get('/', HomeController::class)->name('home');
 });
 
-Route::view('home','web.site.pages.index')->name('pages.home');
+
 Route::view('contact','web.site.pages.contact')->name('pages.contact');
 Route::view('majors','web.site.pages.majors')->name('pages.majors');
 Route::view('history','web.site.pages.history')->name('pages.history');
