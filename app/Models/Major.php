@@ -12,4 +12,8 @@ class Major extends Model
         'title',
         'image',
     ];
+
+    public function roles(){
+        return $this->hasMany(Role::class, 'major_id', 'id');
+    }
 }

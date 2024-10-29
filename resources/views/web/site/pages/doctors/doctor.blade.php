@@ -5,24 +5,24 @@
   <nav style="--bs-breadcrumb-divider: '>'" aria-label="breadcrumb" class="fw-bold my-4 h4">
     <ol class="breadcrumb justify-content-center">
       <li class="breadcrumb-item">
-        <a class="text-decoration-none" href="{{route('pages.home')}}">Home</a>
+        <a class="text-decoration-none" href="{{route('site.home')}}">Home</a>
       </li>
       <li class="breadcrumb-item">
-        <a class="text-decoration-none" href="{{route('pages.doctors.index')}}">doctors</a>
+        <a class="text-decoration-none" href="{{route('site.doctors')}}">doctors</a>
       </li>
       <li class="breadcrumb-item active" aria-current="page">
-        doctor name
+        {{$doctor->name}}
       </li>
     </ol>
   </nav>
   <div class="d-flex flex-column gap-3 details-card doctor-details">
     <div class="details d-flex gap-2 align-items-center">
-      <img src="../assets/images/major.jpg" alt="doctor" class="img-fluid rounded-circle" height="150"
+      <img src="{{get_file_url($doctor->image)}}" alt="doctor" class="img-fluid rounded-circle" height="150"
         width="150" />
       <div class="details-info d-flex flex-column gap-3">
-        <h4 class="card-title fw-bold">Doctor name</h4>
+        <h4 class="card-title fw-bold">{{$doctor->name}}</h4>
         <h6 class="card-title fw-bold">
-          doctor major and more info about the doctor in summary
+          {{($major)}}
         </h6>
       </div>
     </div>

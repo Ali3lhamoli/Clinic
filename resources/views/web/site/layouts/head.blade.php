@@ -7,8 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/splidejs/4.1.4/js/splide.min.js"
         integrity="sha512-4TcjHXQMLM7Y6eqfiasrsnRCc8D/unDeY1UGKGgfwyLUCTsHYMxF7/UHayjItKQKIoP6TTQ6AMamb9w2GMAvNg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/splidejs/4.1.4/css/themes/splide-default.min.css"
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/splidejs/4.1.4/css/themes/splide-default.min.css"
         integrity="sha512-KhFXpe+VJEu5HYbJyKQs9VvwGB+jQepqb4ZnlhUF/jQGxYJcjdxOTf6cr445hOc791FFLs18DKVpfrQnONOB1g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.min.css"
@@ -17,9 +16,9 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.1/css/bootstrap.rtl.min.css"
         integrity="sha512-wO8UDakauoJxzvyadv1Fm/9x/9nsaNyoTmtsv7vt3/xGsug25X7fCUWEyBh1kop5fLjlcrK3GMVg8V+unYmrVA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
-    <link rel="stylesheet" href="{{asset('site/styles/pages/main.css')}}">
+    <link rel="stylesheet" href="{{ asset('site/styles/pages/main.css') }}">
 
-    <title> {{env('APP_NAME')}} |  @yield('title')</title>
+    <title> {{ env('APP_NAME') }} | @yield('title')</title>
 </head>
 
 <body>
@@ -27,7 +26,7 @@
         <nav class="navbar navbar-expand-lg navbar-expand-md bg-blue sticky-top">
             <div class="container">
                 <div class="navbar-brand">
-                    <a class="fw-bold text-white m-0 text-decoration-none h3" href="{{route('site.home')}}">VCare</a>
+                    <a class="fw-bold text-white m-0 text-decoration-none h3" href="{{ route('site.home') }}">VCare</a>
                 </div>
                 <button class="navbar-toggler btn-outline-light border-0 shadow-none" type="button"
                     data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -36,12 +35,22 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
                     <div class="d-flex gap-3 flex-wrap justify-content-center" role="group">
-                        <a type="button" class="btn btn-outline-light navigation--button" href="{{route('site.home')}}">Home</a>
                         <a type="button" class="btn btn-outline-light navigation--button"
-                            href="{{route('pages.majors')}}">majors</a>
+                            href="{{ route('site.home') }}">Home</a>
                         <a type="button" class="btn btn-outline-light navigation--button"
-                            href="{{route('pages.doctors.index')}}">Doctors</a>
-                        <a type="button" class="btn btn-outline-light navigation--button" href="{{route('pages.login')}}">login</a>
+                            href="{{ route('site.majors') }}">majors</a>
+                        <a type="button" class="btn btn-outline-light navigation--button"
+                            href="{{ route('site.doctors') }}">Doctors</a>
+                        @if (auth()->check())
+                            <form action="{{route('site.logout')}}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-outline-light navigation--button">logout</button>
+                            </form>
+                        @else
+                            <a type="button" class="btn btn-outline-light navigation--button"
+                            href="{{ route('site.login.show') }}">login</a>
+                        @endif
+                        
                     </div>
                 </div>
             </div>

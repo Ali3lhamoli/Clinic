@@ -18,9 +18,9 @@
             </div>
         </div><!-- /.container-fluid -->
     </section>
-    
+
     @include('web.inc.success')
-    <a class="m-1 btn btn-primary" href="{{route('admin.majors.create')}}">Add New Major</a>
+    <a class="m-1 btn btn-primary" href="{{ route('admin.majors.create') }}">Add New Major</a>
 
     <div class="card">
         <div class="card-body p-0">
@@ -34,16 +34,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($majors as $major)
+                    @foreach ($majors as $major)
                         <tr>
-                            <td>{{$loop->iteration}}.</td>
-                            <td>{{$major->title}}</td>
+                            <td>{{ $loop->iteration }}.</td>
+                            <td>{{ $major->title }}</td>
                             <td>
-                                <img class="profile-user-img img-fluid img-circle" src="{{get_file_url($major->image)}}" alt="Image">
+                                <img class="profile-user-img img-fluid img-circle" src="{{ get_file_url($major->image) }}"
+                                    alt="Image">
                             </td>
                             <td>
                                 <a href="{{ route('admin.majors.edit', $major->id) }}" class="btn btn-secondary">Edit</a>
-                                <form action="{{ route('admin.majors.destroy', $major->id) }}" method="POST" class="d-inline">
+                                <form action="{{ route('admin.majors.destroy', $major->id) }}" method="POST"
+                                    class="d-inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="btn btn-danger">Delete</button>
@@ -54,6 +56,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="card-footer clearfix">
+                {{ $majors->links() }}
+            </div>
         </div>
         <!-- /.card-body -->
     </div>

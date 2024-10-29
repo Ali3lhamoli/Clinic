@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\MajorRequest;
 use App\Models\Major;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\MajorRequest;
 
 class MajorController extends Controller
 {
@@ -14,7 +14,7 @@ class MajorController extends Controller
      */
     public function index()
     {
-        $majors = Major::orderBy('id','desc')->get();
+        $majors = Major::orderBy('id','desc')->paginate(5);
         return view("web.admin.sections.majors.index",compact('majors'));
     }
 
@@ -72,7 +72,8 @@ class MajorController extends Controller
             $data['image'] = 'storage/' . $filename;
         }
         $major->update($data);
-        return redirect()->route('admin.majors.index')->with('success', 'Major updated successfully');
+        toastr()->success('Major updated successfully');
+        return redirect()->route('admin.majors.index');
 
     }
 
