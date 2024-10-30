@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Site\Auth\LoginController;
 use App\Http\Controllers\Site\Auth\LogoutController;
+use App\Http\Controllers\Site\ContactController;
 use App\Http\Controllers\Site\DoctorController;
 use App\Http\Controllers\Site\MajorController;
 use App\Http\Controllers\Site\OneDoctorController;
@@ -32,20 +33,26 @@ Route::as('site.')->group(function(){
     Route::get('/', HomeController::class)->name('home');
     Route::get('/majors', MajorController::class)->name('majors');
     Route::get('/doctors', DoctorController::class)->name('doctors');
-    Route::get('/doctors/doctor', OneDoctorController::class)->name('doctors.doctor');
+
+    Route::controller(OneDoctorController::class)->group(function(){
+        Route::get('/doctors/doctor', 'show')->name('doctors.doctor');
+        Route::post('/doctors/doctor', 'store')->name('doctors.doctor.store');
+    });
+
+    Route::controller(ContactController::class)->group(function(){
+        Route::get('/contact', 'index')->name('contact');
+        Route::post('/contact', 'store')->name('contact.store');
+    });
 
 
-    Route::get('/register', [RegisterController::class,'show'])->name('register.show');
-    Route::post('/register', [RegisterController::class,'register'])->name('register.store');
-    Route::get('/login', [LoginController::class,'show'])->name('login.show');
-    Route::post('/login', [LoginController::class,'authenticate'])->name('login.authenticate');
+    Route::controller(LoginController::class)->group(function(){
+        Route::get('/login', 'show')->name('login.show');
+        Route::post('/login', 'authenticate')->name('login.authenticate');
+    });
+    
+    Route::controller(RegisterController::class)->group(function(){
+        Route::get('/register', 'show')->name('register.show');
+        Route::post('/register', 'register')->name('register.store');
+
+    });
 });
-
-
-Route::view('contact','web.site.pages.contact')->name('pages.contact');
-Route::view('majofrs','web.site.pages.majors')->name('pages.majors');
-Route::view('history','web.site.pages.history')->name('pages.history');
-Route::view('loggin','web.site.pages.login')->name('pages.login');
-Route::view('rregister','web.site.pages.register')->name('pages.register');
-Route::view('doctor','web.site.pages.doctors.doctor')->name('pages.doctors.doctor');
-Route::view('dodctors','web.site.pages.doctors.index')->name('pages.doctors.index');

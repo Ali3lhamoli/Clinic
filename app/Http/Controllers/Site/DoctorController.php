@@ -20,7 +20,6 @@ class DoctorController extends Controller
         }else{
             $doctors = Role::with('user')->where('is_doctor', 1)->orderBy('id','desc')->paginate(8);
         }
-        // dd($doctors[0]->user->name);
         return view('web.site.pages.doctors.index', compact('doctors'));
     }
 }

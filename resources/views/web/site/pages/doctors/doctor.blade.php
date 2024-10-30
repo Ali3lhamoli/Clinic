@@ -27,20 +27,53 @@
       </div>
     </div>
     <hr />
-    <form class="form">
+    @include('web.inc.errors')
+    <form class="form" action="{{route('site.doctors.doctor.store')}}" method="POST">
+      @csrf
       <div class="form-items">
+        <div class="mb-3" style="display: none;">
+          <input type="number" hidden name="doctor_id" value="{{$doctor->id}}" />
+        </div>
         <div class="mb-3">
           <label class="form-label required-label" for="name">Name</label>
-          <input type="text" class="form-control" id="name" required />
+          <input type="text" name="name" class="form-control" id="name" />
         </div>
         <div class="mb-3">
           <label class="form-label required-label" for="phone">Phone</label>
-          <input type="tel" class="form-control" id="phone" required />
+          <input type="text" name="phone" class="form-control" id="phone" />
         </div>
         <div class="mb-3">
           <label class="form-label required-label" for="email">Email</label>
-          <input type="email" class="form-control" id="email" required />
+          <input type="text" name="email" class="form-control" id="email" />
         </div>
+        <div class="mb-3">
+          @php
+              $currentDateTime = date('Y-m-d\TH:i');
+              $oneWeekLater = date('Y-m-d\TH:i', strtotime('+1 week'));
+          @endphp
+          <label class="form-label required-label" for="appointment">appointment</label>
+          <input type="datetime-local" name="appointment" min="{{$currentDateTime}}" max="{{$oneWeekLater}}" class="form-control" id="appointment" />
+          <script>
+              const appointmentInput = document.getElementById('appointment');
+            
+              appointmentInput.addEventListener('input', function () {
+                  const selectedDate = new Date(this.value);
+      
+                  if (selectedDate.getDay() === 5) {
+                      alert("Friday is not selectable. Please choose another day.");
+                      this.value = ''; 
+                      return;
+                  }
+      
+                  const selectedHour = selectedDate.getHours();
+                  if (selectedHour < 10 || selectedHour >= 20) {
+                      alert("Please select a time between 10:00 AM and 8:00 PM.");
+                      this.value = ''; 
+                  }
+              });
+          </script>
+      </div>
+      
       </div>
       <button type="submit" class="btn btn-primary">
         Confirm Booking
@@ -49,6 +82,7 @@
   </div>
 </div>
 @endsection
+
 
 
 

@@ -18,9 +18,11 @@
                 <a href="{{route('site.home')}}" class="link text-white">Home</a>
                 <a href="{{route('site.majors')}}" class="link text-white">Majors</a>
                 <a href="{{route('site.doctors')}}" class="link text-white">Doctors</a>
+                @if (!auth()->check())
                 <a href="{{route('site.login.show')}}" class="link text-white">Login</a>
                 <a href="{{route('site.register.show')}}" class="link text-white">Register</a>
-                <a href="{{route('pages.contact')}}" class="link text-white">Contact</a>
+                @endif
+                <a href="{{route('site.contact')}}" class="link text-white">Contact</a>
             </div>
         </div>
     </div>
