@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Booking;
+use App\Models\Contact;
+use App\Models\Major;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -12,6 +16,11 @@ class DashboardController extends Controller
      */
     public function __invoke()
     {
-        return view('web.admin.pages.dashboard');
+        $majors = Major::count();
+        $users = User::count();
+        $contacts = Contact::count();
+        $bookings = Booking::count();
+        return view('web.admin.pages.dashboard', compact('majors', 'users', 'contacts', 'bookings'));
+
     }
 }

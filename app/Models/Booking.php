@@ -17,4 +17,8 @@ class Booking extends Model
         'appointment',
         
     ];
+
+    public function user(){
+        return $this->belongsTo(User::class, 'doctor_id', 'id');
+    }
 }

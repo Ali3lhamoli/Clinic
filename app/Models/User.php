@@ -48,4 +48,8 @@ class User extends Authenticatable
     public function role(){
         return $this->hasOne(Role::class);
     }
+
+    public function bookings(){
+        return $this->hasMany(Booking::class, 'doctor_id', 'id');
+    }
 }

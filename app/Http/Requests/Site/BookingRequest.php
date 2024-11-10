@@ -26,7 +26,7 @@ class BookingRequest extends FormRequest
             'name'      => 'required|string|min:3|max:100',
             'phone' => 'required|string',
             'email' => 'required|email',
-            'appointment' => 'required|date',
+            'appointment' => 'required|date|unique:bookings,appointment',
         ];
     }
 }
